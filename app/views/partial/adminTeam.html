@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+
+        <div class="col-sm-10  col-md-10 col-md-offset-1">
+            <h2> {{ team.id ? 'Edit teams' : 'New Team' }} : {{ team.name }}</h2>
+
+            <form name="teamForm" ng-submit="submitForm()" novalidate> <!-- novalidate prevents HTML5 validation since we will be validating ourselves -->
+
+            <!-- NAME -->
+            <div class="form-group" ng-class="{ 'has-error' : teamForm.name.$invalid && !teamForm.name.$pristine }">
+                <label>Name</label>
+                <input type="text" name="name" class="form-control" ng-model="team.name" required>
+                <p ng-show="teamForm.name.$invalid && !teamForm.name.$pristine" class="help-block">Team name is required.</p>
+            </div>
+
+            <!-- PLAYER 1 -->
+            <div class="form-group" ng-class="{ 'has-error' : teamForm.player1.$invalid && !teamForm.player1.$pristine }">
+                <label>Player 1</label>
+                <select class="form-control" name="player1" ng-model="team.player1">
+                     <option ng-selected="team.player1.id == player.id" ng-repeat="player in players" ng-value="player.id">{{player.name}}</option>
+                </select>
+                <p ng-show="teamForm.player1.$invalid && !teamForm.player1.$pristine" class="help-block">Player 1 is required.</p>
+            </div>
+
+            <!-- PLAYER 2 -->
+            <div class="form-group" ng-class="{ 'has-error' : teamForm.player2.$invalid && !teamForm.player2.$pristine }">
+                <label>Player 2</label>
+                <select class="form-control" name="player2" ng-model="team.player2">
+                     <option ng-selected="team.player2.id == player.id" ng-repeat="player in players" ng-value="player.id">{{player.name}}</option>
+                </select>
+                <p ng-show="teamForm.player2.$invalid && !teamForm.player2.$pristine" class="help-block">Player 2 is required.</p>
+            </div>
+
+            <!-- SUBMIT BUTTON -->
+            <button type="submit" class="btn btn-primary" ng-disabled="teamForm.$invalid" ng-show="players.length">Submit</button>
+
+            </form>
+        </div>
+    </div>
+</div>

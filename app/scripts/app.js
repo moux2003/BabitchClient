@@ -82,6 +82,33 @@ angular.module('babitchFrontendApp', [
                     }
                 }
             })
+            .state('root.admin.teams', {
+                url: 'teams',
+                views: {
+                    'main@root': {
+                        templateUrl: 'views/partial/adminTeams.html',
+                        controller: 'babitchAdminTeamsCtrl'
+                    }
+                }
+            })
+            .state('root.admin.team-new', {
+                url: 'teams/new',
+                views: {
+                    'main@root': {
+                        templateUrl: 'views/partial/adminTeam.html',
+                        controller: 'babitchAdminTeamCtrl'
+                    }
+                }
+            })
+            .state('root.admin.team-edit', {
+                url: 'teams/:id',
+                views: {
+                    'main@root': {
+                        templateUrl: 'views/partial/adminTeam.html',
+                        controller: 'babitchAdminTeamEditCtrl'
+                    }
+                }
+            })
             .state('root.stats', {
                 url: 'stats/',
                 templateUrl: 'views/main.html',
