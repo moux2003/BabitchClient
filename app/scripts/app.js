@@ -7,7 +7,8 @@ angular.module('babitchFrontendApp', [
     'babitchServer',
     'faye',
     'ui.gravatar',
-    'restangular'
+    'restangular',
+    'checklist-model'
 ])
     .config(function($stateProvider,  $urlRouterProvider, $httpProvider, gravatarServiceProvider, RestangularProvider, CONFIG) {
         gravatarServiceProvider.defaults = {
@@ -106,6 +107,33 @@ angular.module('babitchFrontendApp', [
                     'main@root': {
                         templateUrl: 'views/partial/adminTeam.html',
                         controller: 'babitchAdminTeamEditCtrl'
+                    }
+                }
+            })
+            .state('root.admin.tournaments', {
+                url: 'tournaments',
+                views: {
+                    'main@root': {
+                        templateUrl: 'views/partial/adminTournaments.html',
+                        controller: 'babitchAdminTournamentsCtrl'
+                    }
+                }
+            })
+            .state('root.admin.tournament-new', {
+                url: 'tournaments/new',
+                views: {
+                    'main@root': {
+                        templateUrl: 'views/partial/adminTournament.html',
+                        controller: 'babitchAdminTournamentCtrl'
+                    }
+                }
+            })
+            .state('root.admin.tournament-edit', {
+                url: 'tournaments/:id',
+                views: {
+                    'main@root': {
+                        templateUrl: 'views/partial/adminTournament.html',
+                        controller: 'babitchAdminTournamentEditCtrl'
                     }
                 }
             })

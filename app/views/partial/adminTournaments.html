@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="page-header">
+        <h1>Tournament List</h1>
+    </div>
+
+    <div class="row">
+        <div class="table-responsive" ng-hide="menuSelect">
+
+            <table id="lastgames" class="table table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Teams</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="tournament in tournaments | orderBy:'id'">
+                        <td>
+                            <a ng-href="#/admin/tournaments/{{ tournament.id }}">
+                                {{ tournament.name }}
+                            </a>
+                        </td>
+                        <td>
+                            <ul>
+                                <li ng-repeat="team in tournament.teams | orderBy:'name'">
+                                {{ team.name }}
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a ng-href="#/admin/tournaments/{{ tournament.id }}" class="btn btn-primary">Edit</a>
+                            <a ng-click="deleteTournament(tournament)" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+
+        <div class="col-sm-10  col-md-10 col-md-offset-1">
+            <h2> {{ tournament.id ? 'Edit Tournament' : 'New Tournament' }} : {{ tournament.name }}</h2>
+
+            <form name="tournamentForm" ng-submit="submitForm()" novalidate> <!-- novalidate prevents HTML5 validation since we will be validating ourselves -->
+
+            <!-- NAME -->
+            <div class="form-group" ng-class="{ 'has-error' : tournamentForm.name.$invalid && !tournamentForm.name.$pristine }">
+                <label>Name</label>
+                <input type="text" name="name" class="form-control" ng-model="tournament.name" required>
+                <p ng-show="tournamentForm.name.$invalid && !tournamentForm.name.$pristine" class="help-block">Tournament name is required.</p>
+            </div>
+
+            <!-- TEAMS -->
+            <div class="form-group" ng-class="{ 'has-error' : tournamentForm.teams.$invalid && !tournamentForm.teams.$pristine }">
+                <div ng-repeat="team in teams" class="checkbox">
+                    <label>
+                      <input type="checkbox" checklist-model="tournament.teams" checklist-value="team.id"> {{ team.name }}
+                    </label>
+                </div>
+                <p ng-show="tournamentForm.teams.$invalid && !tournamentForm.teams.$pristine" class="help-block">One team is required.</p>
+            </div>
+
+            <!-- SUBMIT BUTTON -->
+            <button type="submit" class="btn btn-primary" ng-disabled="tournamentForm.$invalid" ng-show="teams.length">Submit</button>
+
+            </form>
+        </div>
+    </div>
+</div>
