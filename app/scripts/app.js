@@ -137,6 +137,15 @@ angular.module('babitchFrontendApp', [
                     }
                 }
             })
+            .state('root.admin.tournament', {
+                url: 'tournaments/:id/show',
+                views: {
+                    'main@root': {
+                        templateUrl: 'views/partial/tournament.html',
+                        controller: 'babitchTournamentCtrl'
+                    }
+                }
+            })
             .state('root.stats', {
                 url: 'stats/',
                 templateUrl: 'views/main.html',
