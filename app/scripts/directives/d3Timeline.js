@@ -81,6 +81,9 @@ function($window, $timeout, d3Service) {
                                 if(d.autogoal) {
                                     return 'red';
                                 }
+                                if(d.gamelle) {
+                                    return 'blue';
+                                }
                                 return 'black';
                             });
 
@@ -108,6 +111,8 @@ function($window, $timeout, d3Service) {
                                 var text = d.player_name + ' (' + d.position + ') ';
                                 if (d.autogoal) {
                                     text += 'autogoal';
+                                } else if (d.gamelle) {
+                                  text += 'gamelle';
                                 } else {
                                     text += 'goal ' + d.conceder_name;
                                 }

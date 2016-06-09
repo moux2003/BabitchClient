@@ -308,7 +308,7 @@ angular.module('babitchFrontendApp')
 
             //if a coaching has been made
             // If the goaler is not the one previously at this position, invert them
-            if(game.compositionLive[goal.team][goal.position] !== goal.player_id && !goal.autogoal) {
+            if(game.compositionLive[goal.team][goal.position] !== goal.player_id && !goal.autogoal && !goal.gamelle) {
                 var tmpPlayer = game.compositionLive[goal.team][(goal.position === 'defense' ? 'attack' : 'defense')];
                 game.compositionLive[goal.team][(goal.position === 'defense' ? 'attack' : 'defense')] = game.compositionLive[goal.team][goal.position];
                 game.compositionLive[goal.team][goal.position] = tmpPlayer;
@@ -322,7 +322,7 @@ angular.module('babitchFrontendApp')
             }
 
             //if the defender is not the one taking the goal (not an autogoal), invert them
-            if(game.compositionLive[(goal.team === 'red' ? 'blue' : 'red')].defense !== goal.conceder_id && !goal.autogoal ) {
+            if(game.compositionLive[(goal.team === 'red' ? 'blue' : 'red')].defense !== goal.conceder_id && !goal.autogoal && !goal.gamelle ) {
                 //Invert players
                 game.compositionLive[(goal.team === 'red' ? 'blue' : 'red')].attack = game.compositionLive[(goal.team === 'red' ? 'blue' : 'red')].defense;
                 game.compositionLive[(goal.team === 'red' ? 'blue' : 'red')].defense = goal.conceder_id;

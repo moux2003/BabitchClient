@@ -77,7 +77,7 @@
             </div>
 
             <!-- Close button -->
-            <div class="grid-cell grid-cell-{{ focusedSide.position }} grid-cell-{{ focusedSeat.position == 'top' ? 'bottom' : 'top' }}" ng-show="focusedSeat">
+            <div class="grid-cell grid-cell-{{ focusedSide.position }} grid-cell-{{ focusedSeat.position == 'top' ? 'top' : 'bottom' }}" ng-show="focusedSeat">
                 <div class="grid-cell-body focused">
                     <div class="grid-btn" ng-click="resetFocus()">
                         <big><i class="glyphicon glyphicon-remove"></i></big>
@@ -100,6 +100,13 @@
 
         <!-- Buttons grid -->
         <div class="grid" ng-show="goalTypeShawn">
+            <div class="grid-cell grid-cell-{{ focusedSide.position == 'left' ? 'left' : 'right' }} grid-cell-{{ focusedSeat.position == 'top' ? 'bottom' : 'top' }}">
+                <div class="grid-cell-body">
+                    <div class="grid-btn grid-btn-blue btn-gamelle focused" ng-click="gamelle()">
+                        <span>Gamelle</span>
+                    </div>
+                </div>
+            </div>
             <div class="grid-cell grid-cell-{{ focusedSide.position == 'left' ? 'right' : 'left' }} grid-cell-{{ focusedSeat.position }}">
                 <div class="grid-cell-body">
                     <div class="grid-btn grid-btn-white btn-goal focused" ng-click="goal()">

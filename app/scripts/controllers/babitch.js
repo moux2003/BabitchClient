@@ -205,6 +205,7 @@ angular.module('babitchFrontendApp').controller('babitchCtrl', function ($scope,
                 player_id:      $scope.focusedSeat.player.id,
                 conceder_id:    $scope.focusedSide.oppositeSide.seats[1].player.id,
                 autogoal:       false,
+                gamelle:       false,
                 scored_at:      (new Date()).toISOString()
             });
 
@@ -236,6 +237,31 @@ angular.module('babitchFrontendApp').controller('babitchCtrl', function ($scope,
             $scope.resetFocus();
 
             notify('autogoal');
+            checkScore();
+        }
+    };
+
+    /**
+     * Make a gamelle
+     *
+     * @return void
+     */
+    $scope.gamelle = function () {
+        if ($scope.gameStarted && $scope.focusedSeat && $scope.focusedSide) {
+
+            goals.push({
+                position:       $scope.focusedSeat.place,
+                player_id:      $scope.focusedSeat.player.id,
+                conceder_id:    $scope.focusedSide.seats[1].player.id,
+                autogoal:       false,
+                gamelle:       true,
+                scored_at:      (new Date()).toISOString()
+            });
+
+            $scope.focusedSide.oppositeSide.score--;
+            $scope.resetFocus();
+
+            notify('gamelle');
             checkScore();
         }
     };
@@ -283,6 +309,8 @@ angular.module('babitchFrontendApp').controller('babitchCtrl', function ($scope,
 
                 if(lastGoal.autogoal) {
                     side.oppositeSide.score--;
+                } else if(lastGoal.gamelle) {
+                    side.oppositeSide.score++;
                 } else {
                     side.score--;
                 }

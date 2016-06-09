@@ -161,6 +161,10 @@ a {
     background: #C00;
     color: white;
 }
+#match .grid-btn.grid-btn-blue {
+    background: blue;
+    color: white;
+}
 
 
 
