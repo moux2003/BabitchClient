@@ -138,6 +138,10 @@ a {
     color: white;
 }
 
+#match .grid-btn.half-grid {
+  height: 50%;
+}
+
 #match .grid-btn > * {
     position: absolute;
     display: block;
@@ -150,6 +154,7 @@ a {
 #match .grid-btn big {
     font-size: 40px;
     margin-top: -20px;
+    color: black;
 }
 
 #match .grid-btn.grid-btn-white {

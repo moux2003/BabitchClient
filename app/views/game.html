@@ -1,5 +1,6 @@
 <div id="game">
     <div id="header" ng-class="{ 'focused-plus': !focusedSeat }">
+        <a class="navbar-brand" ng-href='/#/'>Babitch</a>
         <div class="container">
 
             <!-- On left -->
@@ -102,7 +103,10 @@
         <div class="grid" ng-show="goalTypeShawn">
             <div class="grid-cell grid-cell-{{ focusedSide.position == 'left' ? 'left' : 'right' }} grid-cell-{{ focusedSeat.position == 'top' ? 'bottom' : 'top' }}">
                 <div class="grid-cell-body">
-                    <div class="grid-btn grid-btn-blue btn-gamelle focused" ng-click="gamelle()">
+                    <div class="grid-btn half-grid grid-btn-red btn-autogoal focused" ng-click="autogoal()">
+                        <span>Own goal</span>
+                    </div>
+                    <div class="grid-btn half-grid grid-btn-blue btn-gamelle focused" ng-click="gamelle()">
                         <span>Gamelle</span>
                     </div>
                 </div>
@@ -116,8 +120,8 @@
             </div>
             <div class="grid-cell grid-cell-{{ focusedSide.position == 'left' ? 'right' : 'left' }} grid-cell-{{ focusedSeat.position == 'top' ? 'bottom' : 'top' }}">
                 <div class="grid-cell-body">
-                    <div class="grid-btn grid-btn-red btn-autogoal focused" ng-click="autogoal()">
-                        <span>Own goal</span>
+                    <div class="grid-btn grid-btn-black btn-demigoal focused" ng-click="demigoal()">
+                        <span>Demi (2pts)</span>
                     </div>
                 </div>
             </div>

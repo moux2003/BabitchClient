@@ -205,11 +205,38 @@ angular.module('babitchFrontendApp').controller('babitchCtrl', function ($scope,
                 player_id:      $scope.focusedSeat.player.id,
                 conceder_id:    $scope.focusedSide.oppositeSide.seats[1].player.id,
                 autogoal:       false,
-                gamelle:       false,
+                demigoal:       false,
+                gamelle:        false,
                 scored_at:      (new Date()).toISOString()
             });
 
             $scope.focusedSide.score++;
+            $scope.resetFocus();
+
+            notify('goal');
+            checkScore();
+        }
+    };
+
+    /**
+     * Make a goal from Demi
+     *
+     * @return void
+     */
+    $scope.demigoal = function () {
+        if ($scope.gameStarted && $scope.focusedSeat && $scope.focusedSide) {
+
+            goals.push({
+                position:       $scope.focusedSeat.place,
+                player_id:      $scope.focusedSeat.player.id,
+                conceder_id:    $scope.focusedSide.oppositeSide.seats[1].player.id,
+                autogoal:       false,
+                demigoal:       true,
+                gamelle:        false,
+                scored_at:      (new Date()).toISOString()
+            });
+
+            $scope.focusedSide.score += 2;
             $scope.resetFocus();
 
             notify('goal');
@@ -230,6 +257,8 @@ angular.module('babitchFrontendApp').controller('babitchCtrl', function ($scope,
                 player_id:      $scope.focusedSeat.player.id,
                 conceder_id:    $scope.focusedSide.seats[1].player.id,
                 autogoal:       true,
+                demigoal:       false,
+                gamelle:        false,
                 scored_at:      (new Date()).toISOString()
             });
 
@@ -254,7 +283,8 @@ angular.module('babitchFrontendApp').controller('babitchCtrl', function ($scope,
                 player_id:      $scope.focusedSeat.player.id,
                 conceder_id:    $scope.focusedSide.seats[1].player.id,
                 autogoal:       false,
-                gamelle:       true,
+                demigoal:       false,
+                gamelle:        true,
                 scored_at:      (new Date()).toISOString()
             });
 
@@ -311,6 +341,8 @@ angular.module('babitchFrontendApp').controller('babitchCtrl', function ($scope,
                     side.oppositeSide.score--;
                 } else if(lastGoal.gamelle) {
                     side.oppositeSide.score++;
+                } else if(lastGoal.demigoal) {
+                    side.score -= 2;
                 } else {
                     side.score--;
                 }
