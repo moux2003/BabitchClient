@@ -2,21 +2,46 @@
     <div class="row">
 
         <div class="col-sm-10  col-md-10 col-md-offset-1">
-            <h2> {{ tournament.name }}</h2>
+            <a ng-click="generateGroups()" class="btn btn-success">Generate Groups</a>
+            <a ng-click="deleteGroups()" class="btn btn-danger">Delete Groups</a>
+            <h2>{{ tournament.name }}</h2>
+            <div ng-repeat="group in groups | orderBy:'id'" class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">{{ group.name|uppercase }}</h3>
+              </div>
+              <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Red Team</th>
+                            <th>Score</th>
+                            <th>Blue Team</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        </tr>
+                    </tbody>
+                </table>
 
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Red Team</th>
-                        <th>Score</th>
-                        <th>Blue Team</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    </tr>
-                </tbody>
-            </table>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th># Rank</th>
+                            <th>Team</th>
+                            <th>Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="team in group.teams | orderBy:'id'">
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ team.name }}</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
         </div>
     </div>
 </div>
