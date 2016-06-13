@@ -1,7 +1,7 @@
 /* jshint camelcase: false */
 'use strict';
 
-angular.module('babitchFrontendApp').controller('babitchCtrl', function ($scope, CONFIG, fayeClient, $interval, Restangular) {
+angular.module('babitchFrontendApp').controller('babitchCtrl', function ($scope, CONFIG, fayeClient, $interval, Restangular, $stateParams) {
     $scope.gameId = null;
     $scope.gameStarted = false;
     $scope.gameEnded = false;
@@ -12,6 +12,7 @@ angular.module('babitchFrontendApp').controller('babitchCtrl', function ($scope,
     $scope.playersList = [];
     $scope.nbPlayers = 0;
     $scope.duration = 0; // seconds
+    $scope.tournamentMatch = null;
 
     var goals = [];
 
@@ -62,6 +63,7 @@ angular.module('babitchFrontendApp').controller('babitchCtrl', function ($scope,
 
     var init = function () {
         loadPlayers();
+        loadTournamentMatch();
     };
 
     var resetGame = function () {
@@ -116,6 +118,14 @@ angular.module('babitchFrontendApp').controller('babitchCtrl', function ($scope,
         Restangular.all('players').getList().then(function(data) {
             $scope.playersList = data;
         });
+    };
+
+    var loadTournamentMatch = function () {
+        if ($stateParams.match != null) {
+          Restangular.one('matches', $stateParams.match).get().then(function(data) {
+            $scope.tournamentMatch = data;
+          });
+        }
     };
 
 
@@ -297,7 +307,13 @@ angular.module('babitchFrontendApp').controller('babitchCtrl', function ($scope,
     };
 
     var checkScore = function () {
-        if ($scope.table.sides[0].score === 10 || $scope.table.sides[1].score === 10) {
+        if ($scope.table.sides[0].score >= 10) {
+            $scope.table.sides[0].score = 10;
+            endGame();
+        }
+
+        if ($scope.table.sides[1].score >= 10) {
+            $scope.table.sides[1].score = 10;
             endGame();
         }
     };
@@ -405,8 +421,16 @@ angular.module('babitchFrontendApp').controller('babitchCtrl', function ($scope,
     };
 
     var saveGame = function () {
-        Restangular.all('games').post($scope.getGameData()).then(function() {
+        Restangular.all('games').post($scope.getGameData()).then(function(game) {
+            console.log('Game:', game);
             //Game Saved
+            if ($scope.tournamentMatch) {
+              $scope.tournamentMatch.blue_team = $scope.tournamentMatch.blue_team.id;
+              $scope.tournamentMatch.red_team = $scope.tournamentMatch.red_team.id;
+              $scope.tournamentMatch.game = game.id;
+
+              $scope.tournamentMatch.put();
+            }
         }, function() {
             setTimeout(function () {
                 $scope.saveGame();

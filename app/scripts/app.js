@@ -36,7 +36,7 @@ angular.module('babitchFrontendApp', [
                 }
             })
             .state('game', {
-                url: '/game',
+                url: '/game?match',
                 controller: 'babitchCtrl',
                 templateUrl: 'views/game.html'
             })
