@@ -124,6 +124,14 @@ angular.module('babitchFrontendApp').controller('babitchCtrl', function ($scope,
         if ($stateParams.match != null) {
           Restangular.one('matches', $stateParams.match).get().then(function(data) {
             $scope.tournamentMatch = data;
+            // Red Team
+            $scope.table.sides[0].seats[0].player = data.red_team.player1;
+            $scope.table.sides[0].seats[1].player = data.red_team.player2;
+            // Blue Team
+            $scope.table.sides[1].seats[0].player = data.blue_team.player1;
+            $scope.table.sides[1].seats[1].player = data.blue_team.player2;
+
+            $scope.nbPlayers = 4;
           });
         }
     };

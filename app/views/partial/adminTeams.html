@@ -9,6 +9,7 @@
             <table id="lastgames" class="table table-hover table-condensed">
                 <thead>
                     <tr>
+                        <th>Country</th>
                         <th>Name</th>
                         <th>Player 1</th>
                         <th>Player 2</th>
@@ -17,6 +18,9 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="team in teams | orderBy:'name'">
+                        <td>
+                          <img src="/images/{{ team.image }}.png" width="30" />
+                        </td>
                         <td>
                             <a ng-href="#/admin/teams/{{ team.id }}">
                                 {{ team.name }}

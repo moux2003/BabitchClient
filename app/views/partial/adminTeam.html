@@ -13,6 +13,13 @@
                 <p ng-show="teamForm.name.$invalid && !teamForm.name.$pristine" class="help-block">Team name is required.</p>
             </div>
 
+            <!-- IMAGE NAME -->
+            <div class="form-group" ng-class="{ 'has-error' : teamForm.image.$invalid && !teamForm.image.$pristine }">
+                <label>Country file name</label>
+                <input type="text" name="image" class="form-control" ng-model="team.image" required>
+                <p ng-show="teamForm.image.$invalid && !teamForm.image.$pristine" class="help-block">Team image is required.</p>
+            </div>
+
             <!-- PLAYER 1 -->
             <div class="form-group" ng-class="{ 'has-error' : teamForm.player1.$invalid && !teamForm.player1.$pristine }">
                 <label>Player 1</label>

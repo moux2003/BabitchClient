@@ -20,12 +20,12 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="match in group.matchs | orderBy:'id'">
-                            <td>{{ match.red_team.name }}</td>
+                            <td><img src="/images/{{ match.red_team.image }}.png" width="30"/> {{ match.red_team.name }}</td>
                             <td ng-show="match.game">{{ match.game.red_score }} - {{ match.game.blue_score }}</td>
                             <td ng-hide="match.game">
                                 <a ng-href="#/game?match={{ match.id }}" class="btn btn-success">Start Game</a>
                             </td>
-                            <td>{{ match.blue_team.name }}</td>
+                            <td>{{ match.blue_team.name }} <img src="/images/{{ match.blue_team.image }}.png" width="30"/></td>
                         </tr>
                     </tbody>
                 </table>
