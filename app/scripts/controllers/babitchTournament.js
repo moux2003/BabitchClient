@@ -8,12 +8,38 @@ angular.module('babitchFrontendApp').controller('babitchTournamentCtrl', functio
 
     $scope.groups = [];
 
+    $scope.teamPoints = {};
+
     Restangular.one('tournaments', $stateParams.id).get().then(function(data) {
         $scope.tournament = data;
+        // Find groups and fill ranking
         $scope.tournament.getList('groups').then(function(groups) {
             $scope.groups = groups;
+            initRanking();
         });
     });
+
+    function initRanking() {
+      angular.forEach($scope.groups, function(group, key) {
+              // Init ranking
+              angular.forEach(group.teams, function(team, key) {
+                $scope.teamPoints[group.id] = $scope.teamPoints[group.id] || {};
+                $scope.teamPoints[group.id][team.id] = {
+                  points: 0,
+                  name: team.name
+                };
+              });
+              angular.forEach(group.matchs, function(match, key) {
+                if (match.game) {
+                  if (match.game.red_score > match.game.blue_score) {
+                    $scope.teamPoints[group.id][red_team.id].points += 3;
+                  } else {
+                    $scope.teamPoints[group.id][blue_team.id].points += 3;
+                  }
+                }
+              });
+            });
+    }
 
     $scope.updateGroups = function(groups) {
         angular.forEach(groups, function(group, key) {
